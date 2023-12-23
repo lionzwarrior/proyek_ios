@@ -67,6 +67,10 @@ class ViewController2: UIViewController {
     
     func refresh(){
         delegate?.refresh()
+        if ud.value(forKey: "items") != nil {
+            items = ud.value(forKey: "items") as! [String]
+            dates = ud.value(forKey: "dates") as! [Date]
+        }
         itemLabel.text = items[index]
         dateLabel.text = Self.dateFormatter.string(from: dates[index])
         title = items[index]
