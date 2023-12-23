@@ -18,6 +18,9 @@ class EntryViewController: UIViewController, UITextFieldDelegate{
     var items: [String] = []
     var dates: [Date] = []
     
+    // Untuk notification
+    let notificationCenter = UNUserNotificationCenter.current()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.becomeFirstResponder()
@@ -30,8 +33,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate{
         datePicker.setDate(Date(), animated: true)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSaveButton))
-
-        // Do any additional setup after loading the view.
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -45,11 +47,41 @@ class EntryViewController: UIViewController, UITextFieldDelegate{
             dates.append(date)
             ud.setValuesForKeys(["items": items, "dates": dates])
             ud.synchronize()
+            
+            // Untuk authorize notification
+            notificationCenter.requestAuthorization(options: [.sound,.badge,.alert]) { sucess, error in
+                if error == nil {
+                    print("Authorize Succesfully")
+                } else {
+                    print("Authorize Failed")
+                }
+            }
+            // Add Notification
+            localNotification()
+            
             completionHandler?()
             navigationController?.popToRootViewController(animated: true)
         }
         else{
             print("Add Something")
+        }
+    }
+    
+    func localNotification() {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Hello"
+        content.body = "This is My First Notification"
+        content.sound = UNNotificationSound.default
+        
+        let identifier = UUID().uuidString
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { error in
+            if error == nil {
+                print("Message sent sucessfully")
+            }
         }
     }
 }

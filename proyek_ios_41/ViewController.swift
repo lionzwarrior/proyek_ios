@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, refresh {
     let ud = UserDefaults.standard
     var items: [String] = []
     var dates: [Date] = []
@@ -41,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "View") as? ViewController2 else{
             return
         }
+        vc.delegate = self
         vc.index = indexPath.row
         vc.deletionHandler = {[weak self]
             in self?.refresh()
@@ -56,14 +57,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         vc.completionHandler = { [weak self] in
             self?.refresh()
-            
         }
         vc.title = "New Item"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     
     }
-    func refresh(){
+    public func refresh(){
         if ud.value(forKey: "items") != nil {
             items = ud.value(forKey: "items") as! [String]
             dates = ud.value(forKey: "dates") as! [Date]

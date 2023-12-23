@@ -125,13 +125,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dateLabel" destination="lQr-x5-NWK" id="kOK-0T-IJu"/>
-                        <outlet property="itemLabel" destination="vy4-kh-9kT" id="j2u-Rt-oK2"/>
+                        <outlet property="dateLabel" destination="lQr-x5-NWK" id="dbs-DG-Pbs"/>
+                        <outlet property="itemLabel" destination="vy4-kh-9kT" id="mfT-fK-ExR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHS-oD-j8h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2377" y="54"/>
+            <point key="canvasLocation" x="2354" y="110"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="4La-t0-Fuq">
@@ -343,6 +343,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eb-1z-8Ev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-7.2463768115942031" y="51.5625"/>
+        </scene>
+        <!--View Controller3-->
+        <scene sceneID="TZv-x0-NFe">
+            <objects>
+                <viewController storyboardIdentifier="View3" id="KFk-pI-32t" customClass="ViewController3" customModule="proyek_ios_41" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DLC-sC-9WO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="BpT-2J-qaS">
+                                <rect key="frame" x="47" y="138" width="320" height="216"/>
+                            </datePicker>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ToT-4i-qCF">
+                                <rect key="frame" x="20" y="54" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="X5w-UB-Q7o"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BpT-2J-qaS" firstAttribute="centerX" secondItem="DLC-sC-9WO" secondAttribute="centerX" id="9wB-Bk-lNx"/>
+                            <constraint firstItem="ToT-4i-qCF" firstAttribute="top" secondItem="X5w-UB-Q7o" secondAttribute="top" constant="10" id="LY5-Ig-e23"/>
+                            <constraint firstItem="ToT-4i-qCF" firstAttribute="leading" secondItem="X5w-UB-Q7o" secondAttribute="leading" constant="20" id="Whc-dP-avW"/>
+                            <constraint firstItem="X5w-UB-Q7o" firstAttribute="trailing" secondItem="ToT-4i-qCF" secondAttribute="trailing" constant="20" id="bU5-WP-n5j"/>
+                            <constraint firstItem="BpT-2J-qaS" firstAttribute="top" secondItem="ToT-4i-qCF" secondAttribute="bottom" constant="50" id="sib-bH-BKy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="BpT-2J-qaS" id="iDm-0W-pEq"/>
+                        <outlet property="textField" destination="ToT-4i-qCF" id="Noj-yE-U6K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2sU-LL-1UB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3139" y="125"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

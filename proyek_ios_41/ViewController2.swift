@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol refresh {
+    func refresh()
+}
+
 class ViewController2: UIViewController {
     let ud = UserDefaults.standard
     var items: [String] = []
     var dates: [Date] = []
     var index = 0
     public var deletionHandler: (() -> Void)?
+    var delegate: refresh?
     
     @IBOutlet var itemLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
@@ -33,7 +38,9 @@ class ViewController2: UIViewController {
         itemLabel.text = items[index]
         dateLabel.text = Self.dateFormatter.string(from: dates[index])
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete)), UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEdit))]
+        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
 
         // Do any additional setup after loading the view.
     }
@@ -45,7 +52,26 @@ class ViewController2: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
-
+    @objc private func didTapEdit(){
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "View3") as? ViewController3 else{
+            return
+        }
+        vc.completionHandler = { [weak self] in
+            self?.refresh()
+        }
+        vc.index = index
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = items[index]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func refresh(){
+        delegate?.refresh()
+        itemLabel.text = items[index]
+        dateLabel.text = Self.dateFormatter.string(from: dates[index])
+        title = items[index]
+    }
+    
     /*
     // MARK: - Navigation
 
